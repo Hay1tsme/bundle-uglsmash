@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<!--<img src="https://ugleague.challonge.com/abxysmash9.svg" style="height:1080px"> -->
+<div id="test"></div>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" id="main">
+	<g fill="red">
+	<polygon points="240,0 960,0 910,75, 300,75" />
+	<polygon points="960,0 1680,0, 1630,75 1010,75" />
+	</g>
+	<g stroke="black" stroke-width=1 text-anchor="middle" fill="white" font-size="60">
+	<!--<text x="605" y="50" id="player">TTC | Lapis Lazuli</text>-->
+	<!--<text x="1290" y="50" id="playerR">TTC | Lapis Lazuli</text>-->
+	</g>
+</svg>
+<div style="position:absolute;top:0px;left:310px;color:white;font-size:60px;height:75px;width:610px">
+<div id="playerL" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">TTC | Lapis Lazuli</div></div>
+<div style="position:absolute;top:0px;left:1020px;color:white;font-size:60px;height:75px;width:610px">
+<div id="playerR" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">TTC | Lapis Lazuli</div></div>
+<script type="text/javascript">	
+	const pLR = nodecg.Replicant('playerL');
+	const pRR = nodecg.Replicant('playerR');
+	
+	pLR.on('change', (newValue, oldValue) => {
+		playerL.innerText = newValue;
+	});
+	pRR.on('change', (newValue, oldValue) => {
+		playerR.innerText = newValue;
+	});
+</script>
+</html>

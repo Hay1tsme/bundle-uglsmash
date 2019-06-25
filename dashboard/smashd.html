@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+<label>Challonge API Key:</label>
+<input id="capi" type="password"></input>
+<br>
+<label>URL Stub*:</label>
+<input id="cid" type="text"></input>
+<br>
+<button id="btnApi">Get</button>
+<br>
+<br>
+<label>Left Player:</label>
+<br>
+<label>Name:</label>
+<div id="playerL"></div>
+&nbsp;<label>Score:</label>
+<input id="playerLScore" type="number" value="0"></input>
+&nbsp;<label>Losers?</label>
+<input type="checkbox" id="fromLosersL">
+<br><br><input type="button" value="Update" id="btnUpdate">&nbsp;<input type="button" value="Switch" id="btnSw"><br><br>
+<label>Right Player:</label>
+<br>
+<label>Name:</label>
+<div id="playerR"></div>
+&nbsp;<label>Score:</label>
+<input id="playerRScore" type="number" value="0"></input>
+&nbsp;<label>Losers?</label>
+<input type="checkbox" id="fromLosersR">
+<p>
+<div id="status"></div>
+<p id="footer">
+*Should be the tournament url, ex. mytourn. If a subdomain is used, must be in the form mysub-mytourn.
+</body>
+<script>
+	const capi = document.querySelector('#capi');
+	const cid = document.querySelector('#cid');
+	const urlBase = " https://api.challonge.com/v1/tournaments/"	
+	const capiReplicant = nodecg.Replicant('capi-results');
+	const pLR = nodecg.Replicant('playerL');
+	const pRR = nodecg.Replicant('playerR');
+	
+	var pLS;
+	var pRS;
+	var pL = document.querySelector("#playerL");
+	var pR = document.querySelector("#playerR");
+	var tmp;
+	var url;
+	
+	btnApi.onclick = () => {
+		// A Replicant can be modified by modifying its `value`.
+		url = urlBase + cid.value + "/participants.json?api_key=" + capi.value;
+		document.querySelector("#status").innerHTML = "GET Request to " + url;
+		nodecg.sendMessage('capiGetInfo', url);
+	};
+	
+	btnSw.onclick = () => {
+		document.querySelector("#status").innerHTML = "Swapping...";
+		//TODO: Swap the selected indecies of both select boxes
+		tmp = pLR.value;
+		pLR.value = pRR.value;
+		pRR.value = tmp;
+	};
+	
+	btnUpdate.onclick = () => {
+		document.querySelector("#status").innerHTML = "Updating Names...";
+		
+		pLS = document.querySelector("#playerLS");
+		pRS = document.querySelector("#playerRS");
+		
+		pLR.value = pLS.value;
+		pRR.value = pRS.value;
+		
+		document.querySelector("#status").innerHTML = "Updated Names: " + pLS.value + " " + pRS.value;
+	};
+	
+	capiReplicant.on('change', (newValue, oldValue) => {
+			if (!newValue) {
+				return;
+			}
+			
+			document.querySelector("#status").innerHTML = "Got results!";
+			textR = "<select id='playerRS'><option value='blank'></option>";
+			textL = "<select id='playerLS'><option value='blank'></option>";
+			newValue.forEach(result => {
+				textL = textL + "<option value='" + result.participant.name + "'>" + result.participant.name + "</option>";
+				textR = textR + "<option value=" + result.participant.name + ">" + result.participant.name + "</option>";
+			});
+			textR = textR + "</select>"
+			textL = textL + "</select>"
+			pR.innerHTML = textR;
+			pL.innerHTML = textL;
+			pLS = document.querySelector("#playerLS");
+			pRS = document.querySelector("#playerRS");
+			document.querySelector("#status").innerHTML = "First: " + newValue[1].participant.name;
+		});
+</script>
+<style>
+#playerLScore {
+  width: 3em;
+}
+#playerRScore {
+  width: 3em;
+}
+#footer {
+	font-size: 12px;
+}
+</style>
+</html>
