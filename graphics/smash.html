@@ -4,27 +4,41 @@
 <div id="test"></div>
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" id="main">
 	<g fill="red">
-	<polygon points="240,0 960,0 910,75, 300,75" />
-	<polygon points="960,0 1680,0, 1630,75 1010,75" />
+	<polygon points="240,0 960,0 910,50, 300,50" />
+	<polygon points="960,0 1680,0, 1630,50 1010,50" />	
 	</g>
-	<g stroke="black" stroke-width=1 text-anchor="middle" fill="white" font-size="60">
-	<!--<text x="605" y="50" id="player">TTC | Lapis Lazuli</text>-->
-	<!--<text x="1290" y="50" id="playerR">TTC | Lapis Lazuli</text>-->
+	<g style="fill:rgb(65,69,90)">
+	<rect width="50" height="50" transform="translate(745,985) rotate(45)" />
+	<rect width="50" height="50" transform="translate(1095,985) rotate(45)" />
 	</g>
 </svg>
-<div style="position:absolute;top:0px;left:310px;color:white;font-size:60px;height:75px;width:610px">
-<div id="playerL" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">TTC | Lapis Lazuli</div></div>
-<div style="position:absolute;top:0px;left:1020px;color:white;font-size:60px;height:75px;width:610px">
-<div id="playerR" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">TTC | Lapis Lazuli</div></div>
+<div style="position:absolute;top:3px;left:310px;color:white;font-size:50px;height:50px;width:610px">
+<div id="playerL" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
+<div style="position:absolute;top:3px;left:1020px;color:white;font-size:50px;height:50px;width:610px">
+<div id="playerR" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
+
+<div style="position:absolute;top:1000px;left:720px;color:white;font-size:60px;height:50px;width:50px">
+<div id="playerLS" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">0</div></div>
+<div style="position:absolute;top:1000px;left:1070px;color:white;font-size:60px;height:50px;width:50px">
+<div id="playerRS" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">0</div></div>
+
 <script type="text/javascript">	
 	const pLR = nodecg.Replicant('playerL');
-	const pRR = nodecg.Replicant('playerR');
+	const pRR = nodecg.Replicant('playerR');	
+	const pLSR = nodecg.Replicant('playerLS');
+	const pRSR = nodecg.Replicant('playerRS');
 	
 	pLR.on('change', (newValue, oldValue) => {
 		playerL.innerText = newValue;
 	});
 	pRR.on('change', (newValue, oldValue) => {
 		playerR.innerText = newValue;
+	});
+	pLSR.on('change', (newValue, oldValue) => {
+		playerLS.innerText = newValue;
+	});
+	pRSR.on('change', (newValue, oldValue) => {
+		playerRS.innerText = newValue;
 	});
 </script>
 </html>
