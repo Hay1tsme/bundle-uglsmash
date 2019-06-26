@@ -39,13 +39,22 @@
 	const capiReplicant = nodecg.Replicant('capi-results');
 	const pLR = nodecg.Replicant('playerL');
 	const pRR = nodecg.Replicant('playerR');
+	const pLSR = nodecg.Replicant('playerLS');
+	const pRSR = nodecg.Replicant('playerRS');
 	
 	var pLS;
 	var pRS;
 	var pL = document.querySelector("#playerL");
 	var pR = document.querySelector("#playerR");
-	var tmp;
+	var pLSc = document.querySelector("#playerLScore");
+	var pRSc = document.querySelector("#playerRScore");
+	
 	var url;
+	var tmp1;	
+	var tmp2;
+	
+	pRSR.value = 0;
+	pLSR.value = 0;
 	
 	btnApi.onclick = () => {
 		// A Replicant can be modified by modifying its `value`.
@@ -56,10 +65,18 @@
 	
 	btnSw.onclick = () => {
 		document.querySelector("#status").innerHTML = "Swapping...";
-		//TODO: Swap the selected indecies of both select boxes
-		tmp = pLR.value;
+		
+		tmp1 = pLR.value;
 		pLR.value = pRR.value;
-		pRR.value = tmp;
+		pRR.value = tmp1;
+		
+		tmp2 = pLS.selectedIndex ;
+		pLS.selectedIndex  = pRS.selectedIndex ;
+		pRS.selectedIndex  = tmp2;
+		
+		//TODO: Swap the scores and loser checkboxes
+		
+		document.querySelector("#status").innerHTML = "Swapped " + pLR.value + " " + pRR.value;
 	};
 	
 	btnUpdate.onclick = () => {
@@ -80,11 +97,11 @@
 			}
 			
 			document.querySelector("#status").innerHTML = "Got results!";
-			textR = "<select id='playerRS'><option value='blank'></option>";
-			textL = "<select id='playerLS'><option value='blank'></option>";
+			textR = "<select id='playerRS'><option value=''></option>";
+			textL = "<select id='playerLS'><option value=''></option>";
 			newValue.forEach(result => {
 				textL = textL + "<option value='" + result.participant.name + "'>" + result.participant.name + "</option>";
-				textR = textR + "<option value=" + result.participant.name + ">" + result.participant.name + "</option>";
+				textR = textR + "<option value='" + result.participant.name + "'>" + result.participant.name + "</option>";
 			});
 			textR = textR + "</select>"
 			textL = textL + "</select>"
@@ -92,7 +109,7 @@
 			pL.innerHTML = textL;
 			pLS = document.querySelector("#playerLS");
 			pRS = document.querySelector("#playerRS");
-			document.querySelector("#status").innerHTML = "First: " + newValue[1].participant.name;
+			document.querySelector("#status").innerHTML = "First: " + newValue[0].participant.name;
 		});
 </script>
 <style>
