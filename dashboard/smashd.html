@@ -50,8 +50,7 @@
 	var pRSc = document.querySelector("#playerRScore");
 	
 	var url;
-	var tmp1;	
-	var tmp2;
+	var tmp;
 	
 	pRSR.value = 0;
 	pLSR.value = 0;
@@ -66,15 +65,23 @@
 	btnSw.onclick = () => {
 		document.querySelector("#status").innerHTML = "Swapping...";
 		
-		tmp1 = pLR.value;
+		tmp = pLR.value;
 		pLR.value = pRR.value;
-		pRR.value = tmp1;
+		pRR.value = tmp;
 		
-		tmp2 = pLS.selectedIndex ;
+		tmp = pLS.selectedIndex ;
 		pLS.selectedIndex  = pRS.selectedIndex ;
-		pRS.selectedIndex  = tmp2;
+		pRS.selectedIndex  = tmp;
 		
-		//TODO: Swap the scores and loser checkboxes
+		tmp = pLSc.value;
+		pLSc.value = pRSc.value;
+		pRSc.value = tmp;
+		
+		tmp = pLSR.value;
+		pLSR.value = pRSR.value;
+		pRSR.value = tmp;
+		
+		//TODO: Swap loser checkboxes
 		
 		document.querySelector("#status").innerHTML = "Swapped " + pLR.value + " " + pRR.value;
 	};
@@ -87,6 +94,9 @@
 		
 		pLR.value = pLS.value;
 		pRR.value = pRS.value;
+		
+		pLSR.value = pLSc.value;
+		pRSR.value = pRSc.value;
 		
 		document.querySelector("#status").innerHTML = "Updated Names: " + pLS.value + " " + pRS.value;
 	};
