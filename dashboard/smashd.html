@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!--TODO: Implement the 'from losers' tickboxes-->
 <body>
 <label>Challonge API Key:</label>
 <input id="capi" type="password"></input>
@@ -20,8 +21,10 @@
 <br>
 <label>Name:</label>
 <div id="playerL"></div>
+<!--<input id="playerLS" type="text"></input>-->
 &nbsp;<label>Score:</label>
 <input id="playerLScore" type="number" value="0"></input>
+<br>
 &nbsp;<label>Losers?</label>
 <input type="checkbox" id="fromLosersL">
 <br><br>
@@ -29,8 +32,10 @@
 <br>
 <label>Name:</label>
 <div id="playerR"></div>
+<!--<input id="playerRS" type="text"></input>-->
 &nbsp;<label>Score:</label>
 <input id="playerRScore" type="number" value="0"></input>
+<br>
 &nbsp;<label>Losers?</label>
 <input type="checkbox" id="fromLosersR">
 <br><br><input type="button" value="Update" id="btnUpdate">&nbsp;<input type="button" value="Switch" id="btnSw">
@@ -48,8 +53,8 @@
 	const pRR = nodecg.Replicant('playerR');
 	const pLSR = nodecg.Replicant('playerLS');
 	const pRSR = nodecg.Replicant('playerRS');
-	const tNameR = nodecg.Replicant('tournName');
-	const rNameR = nodecg.Replicant('roundName');
+	const tNameR = nodecg.Replicant('tName');
+	const rNameR = nodecg.Replicant('rName');
 	
 	var pLS;
 	var pRS;
@@ -59,7 +64,9 @@
 	var pRSc = document.querySelector("#playerRScore");
 	var tName = document.querySelector("#tName");
 	var rName = document.querySelector("#rName");
-	
+	var pLL = document.querySelector("#fromLosersL");
+	var pRL = document.querySelector("#fromLosersR");
+	//var status = document.querySelector("#status"); not sure why this doesn't work
 	var url;
 	var tmp;
 	
@@ -108,6 +115,9 @@
 		
 		pLSR.value = pLSc.value;
 		pRSR.value = pRSc.value;
+		
+		tNameR.value = tName.value;
+		rNameR.value = rName.value;
 		
 		document.querySelector("#status").innerHTML = "Updated Names: " + pLS.value + " " + pRS.value;
 	};

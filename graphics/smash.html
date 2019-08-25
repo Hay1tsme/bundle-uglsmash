@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html>
-<!--<img src="https://ugleague.challonge.com/abxysmash9.svg" style="height:1080px"> -->
 <div id="test"></div>
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" id="main">
 	<g fill="rgb(226,35,54)">
-	<polygon points="240,0 960,0 910,50, 300,50" />
-	<polygon points="960,0 1680,0, 1630,50 1010,50" />	
+		<polygon points="240,0 960,0 910,50, 300,50" />
+		<polygon points="960,0 1680,0, 1630,50 1010,50" />	
 	</g>
 	<g style="fill:rgb(65,69,90)">
-	<rect width="50" height="50" transform="translate(800,985) rotate(45)" />
-	<rect width="50" height="50" transform="translate(1120,985) rotate(45)" />
+		<rect width="50" height="50" transform="translate(800,985) rotate(45)" />
+		<rect width="50" height="50" transform="translate(1120,985) rotate(45)" />
 	</g>
 	<g style="fill:rgb(39,117,108)">
-	<rect width="267" height="150" transform="translate(70,880) rotate(10)" />
-	<rect width="267" height="150" transform="translate(1550,930) rotate(350)" />
+		<rect width="267" height="150" transform="translate(70,880) rotate(10)" />
+		<rect width="267" height="150" transform="translate(1550,930) rotate(350)" />
 	</g>
 	<g style="fill:white">
-	<circle r="50" cx="960" cy="1000">
+		<circle r="50" cx="960" cy="1000">
+	</g>
+	<g>
+		<polygon points="460,1035 715,1035 715,1000 520,1000" style="fill:red" />
+		<polygon points="1200,1035 1455,1035 1455,1000 1260,1000" style="fill:blue" />
 	</g>
 </svg>
 <div style="position:absolute;top:3px;left:310px;color:white;font-size:50px;height:50px;width:610px">
-<div id="playerL" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
+<div id="tName" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
 <div style="position:absolute;top:3px;left:1020px;color:white;font-size:50px;height:50px;width:610px">
-<div id="playerR" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
+<div id="rName" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
 
 <div style="position:absolute;top:1000px;left:775px;color:white;font-size:60px;height:50px;width:50px">
 <div id="playerLS" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">0</div></div>
 <div style="position:absolute;top:1000px;left:1095px;color:white;font-size:60px;height:50px;width:50px">
 <div id="playerRS" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">0</div></div>
 
+<div style="position:absolute;top:1010px;left:580px;color:white;font-size:35px;height:50px;width:50px">
+<div id="playerL" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">0</div></div>
+<div style="position:absolute;top:1010px;left:1319px;color:white;font-size:35px;height:50px;width:50px">
+<div id="playerR" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;">0</div></div>
+
 <script type="text/javascript">	
 	const pLR = nodecg.Replicant('playerL');
 	const pRR = nodecg.Replicant('playerR');	
 	const pLSR = nodecg.Replicant('playerLS');
 	const pRSR = nodecg.Replicant('playerRS');
+	const tNameR = nodecg.Replicant('tName');
+	const rNameR = nodecg.Replicant('rName');
 	
 	pLR.on('change', (newValue, oldValue) => {
 		playerL.innerText = newValue;
@@ -47,5 +57,12 @@
 	pRSR.on('change', (newValue, oldValue) => {
 		playerRS.innerText = newValue;
 	});
+	tNameR.on('change', (newValue, oldValue) => {
+		tName.innerText = newValue;
+	});
+	rNameR.on('change', (newValue, oldValue) => {
+		rName.innerText = newValue;
+	});
+	
 </script>
 </html>

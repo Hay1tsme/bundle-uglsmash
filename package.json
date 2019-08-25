@@ -25,6 +25,13 @@
 			"width": 3,
 			"file": "smashd.html",
 			"headerColor": "#9f9bbd"
+		},
+		{
+			"name": "caster",
+			"title": "Caster Overlay",
+			"width": 3,
+			"file": "casterd.html",
+			"headerColor": "#9f9bbd"
 		}
 	]
   }
