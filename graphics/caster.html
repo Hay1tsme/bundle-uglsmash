@@ -1,51 +1,82 @@
 <!DOCTYPE html>
 <html>
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" id="main">
-	<g fill="rgb(226,35,54)">
-		<polygon points="240,0 960,0 910,50, 300,50" />
-		<polygon points="960,0 1680,0, 1630,50 1010,50" />	
-	</g>
-	<g style="fill:rgb(39,117,108)">
-		<rect width="267" height="150" transform="translate(70,880) rotate(10)" />
-		<rect width="267" height="150" transform="translate(1550,930) rotate(350)" />
-	</g>
-	<g>
-		<polygon points="460,1080 1455,1080 1395,975 520,975" style="fill:blue; stroke:black;" />
-		<polygon points="489,1030 1426,1030 1395,975 520,975" style="fill:rgb(10,10,200); stroke:black;" />
-	</g>
-	<g style="fill:white">
-		<circle r="50" cx="960" cy="1027">
-	</g>
-</svg>
-<div style="position:absolute;top:3px;left:310px;color:white;font-size:50px;height:50px;width:610px">
-<div id="tName" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
-<div style="position:absolute;top:3px;left:1020px;color:white;font-size:50px;height:50px;width:610px">
-<div id="rName" style="min-height:75px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);overflow:hidden;white-space:nowrap;"></div></div>
-<script type="text/javascript">
-	const tNameR = nodecg.Replicant('tName');
-	const rNameR = nodecg.Replicant('rName');
-	const clNameR = nodecg.Replicant('clName');
-	const clSocR = nodecg.Replicant('clSoc');
-	const crNameR = nodecg.Replicant('crName');
-	const crSocR = nodecg.Replicant('crSoc');
-	tNameR.on('change', (newValue, oldValue) => {
-		tName.innerText = newValue;
-	});
-	rNameR.on('change', (newValue, oldValue) => {
-		rName.innerText = newValue;
-	});
-	clNameR.on('change', (newValue, oldValue) => {
-		clName.innerText = newValue;
-	});
-	clSocR.on('change', (newValue, oldValue) => {
-		clSoc.innerText = newValue;
-	});
-	crNameR.on('change', (newValue, oldValue) => {
-		crName.innerText = newValue;
-	});
-	crSocR.on('change', (newValue, oldValue) => {
-		crSoc.innerText = newValue;
-	});
-	
-</script>
+<head><title>Smash Caster Graphic</title></head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" id="main">
+		<g fill="rgb(226,35,54)">
+			<polygon points="240,0 960,0 910,50, 300,50" />
+			<polygon points="960,0 1680,0, 1630,50 1010,50" />
+		</g>
+		<g style="fill: rgb(39, 117, 108)">
+			<rect width="267" height="150" transform="translate(70,880) rotate(10)" />
+			<rect width="267" height="150" transform="translate(1550,930) rotate(350)" />
+		</g>
+		<g>
+			<polygon points="460,1080 1455,1080 1395,975 520,975" style="fill: blue; stroke: black;" />
+			<polygon points="489,1030 1426,1030 1395,975 520,975" style="fill: rgb(10, 10, 200); stroke: black;" />
+		</g>
+		<g style="fill: white">
+			<circle r="50" cx="960" cy="1027" />
+		</g>
+	</svg>
+	<div style="position: absolute; top: 3px; left: 310px; color: white; font-size: 50px; height: 50px; width: 610px">
+		<div id="tName" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
+	</div>
+	<div style="position: absolute; top: 3px; left: 1020px; color: white; font-size: 50px; height: 50px; width: 610px">
+		<div id="rName" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
+	</div>
+	<div style="position: absolute; top: 980px; left: 510px; color: white; font-size: 50px; height: 50px; width: 410px">
+		<div id="cLD" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
+	</div>
+	<div style="position: absolute; top: 1030px; left: 490px; color: white; font-size: 50px; height: 50px; width: 430px">
+		<div id="cLSD" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
+	</div>
+	<div style="position: absolute; top: 980px; left: 1020px; color: white; font-size: 50px; height: 50px; width: 410px">
+		<div id="cRD" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
+	</div>
+	<div style="position: absolute; top: 1030px; left: 1020px; color: white; font-size: 50px; height: 50px; width: 430px">
+		<div id="cRSD" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
+	</div>
+
+	<script type="text/javascript">
+		const tNameR = nodecg.Replicant('tName');
+		const rNameR = nodecg.Replicant('rName');
+		const cLR = nodecg.Replicant('casterL');
+		const cLSR = nodecg.Replicant('casterLS');
+		const cRR = nodecg.Replicant('casterR');
+		const cRSR = nodecg.Replicant('casterRS');
+		tNameR.on('change',
+			(newValue, oldValue) => {
+				tName.innerText = newValue;
+			});
+		rNameR.on('change',
+			(newValue, oldValue) => {
+				rName.innerText = newValue;
+			});
+		cLR.on('change',
+			(newValue, oldValue) => {
+				cLD.innerText = newValue;
+			});
+		cLSR.on('change',
+			(newValue, oldValue) => {
+				if (newValue !== "") 
+					cLSD.innerText = "@" + newValue;
+				else
+					cLSD.innerText = newValue;
+
+				});
+		cRR.on('change',
+			(newValue, oldValue) => {
+				cRD.innerText = newValue;
+			});
+		cRSR.on('change',
+			(newValue, oldValue) => {
+				if (newValue !== "") 
+					cRSD.innerText = "@" + newValue;
+				else
+					cRSD.innerText = newValue;
+			});
+
+	</script>
+</body>
 </html>

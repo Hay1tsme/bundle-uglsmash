@@ -1,23 +1,65 @@
 <!DOCTYPE html>
 <html>
 <body>
-<label>Left Caster:</label>
-<br>
-<label>Name:</label>
-<input id="casterL" type="text" value=""></input><br>
-<label>Social:</label>
-<input id="casterLS" type="text" value=""></input>
-<br><br>
-<label>Right Caster:</label>
-<br>
-<label>Name:</label>
-<input id="casterR" type="text" value=""></input><br>
-<label>Socal:</label>
-<input id="casterRS" type="text" value=""></input>
-<br><br><input type="button" value="Update" id="btnUpdate">&nbsp;<input type="button" value="Switch" id="btnSw">
-<br><br>
-<div id="status"></div>
+	<label>Left Caster:</label>
+	<br>
+	<label>Name:</label>
+	<input id="casterL" type="text" value=""><br>
+	<label>Social:</label>
+	<input id="casterLS" type="text" value="">
+	<br><br>
+	<label>Right Caster:</label>
+	<br>
+	<label>Name:</label>
+	<input id="casterR" type="text" value=""><br>
+	<label>Social:</label>
+	<input id="casterRS" type="text" value="">
+	<br><br><input type="button" value="Update" id="btnUpdate">&nbsp;<input type="button" value="Switch" id="btnSw">
+	<br><br>
+	<div id="status"></div>
+
+	<script type="text/javascript">
+		const cLR = nodecg.Replicant('casterL');
+		const cRR = nodecg.Replicant('casterR');
+		const cLSR = nodecg.Replicant('casterLS');
+		const cRSR = nodecg.Replicant('casterRS');
+
+		var tmp;
+		var cL = document.querySelector("#casterL");
+		var cR = document.querySelector("#casterR");
+		var cLS = document.querySelector("#casterLS");
+		var cRS = document.querySelector("#casterRS");
+
+		btnSw.onclick = () => {
+			document.querySelector("#status").innerHTML = "Swapping...";
+
+			tmp = cLR.value;
+			cLR.value = cRR.value;
+			cRR.value = tmp;
+
+			tmp = cLSR.value;
+			cLSR.value = cRSR.value;
+			cRSR.value = tmp;
+
+			cL.value = cRR.value;
+			cR.value = cLR.value;
+			cLS.value = cRSR.value;
+			cRS.value = cLSR.value;
+
+			document.querySelector("#status").innerHTML = "Swapped " + cLR.value + " " + cRR.value;
+		};
+
+		btnUpdate.onclick = () => {
+			document.querySelector("#status").innerHTML = "Updating Names...";
+
+			cLR.value = cL.value;
+			cRR.value = cR.value;
+
+			cLSR.value = cLS.value;
+			cRSR.value = cRS.value;
+
+			document.querySelector("#status").innerHTML = "Updated Names: " + cL.value + " " + cR.value;
+		};
+	</script>
 </body>
-<script type="text/javascript">
-</script>
 </html>
