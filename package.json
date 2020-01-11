@@ -8,6 +8,7 @@
   },
   "author": "Hay1tsme",
   "license": "MIT",
+
   "nodecg": {
     "compatibleRange": ">=0.9",
     "graphics": [
@@ -17,24 +18,21 @@
         "height": 1080
       }
     ],
-    "dashboardPanels": [
-      {
-        "name": "smash",
-        "title": "Smash Overlay",
-        "width": 3,
-        "file": "smashd.html",
-        "headerColor": "#9f9bbd"
-      },
-      {
-        "name": "caster",
-        "title": "Caster Overlay",
-        "width": 3,
-        "file": "casterd.html",
-        "headerColor": "#9f9bbd"
-      }
-    ]
-  },
-  "dependencies": {
-    "axios": "^0.19.0"
+	"dashboardPanels": [
+		{
+			"name": "smash",
+			"title": "Smash Overlay",
+			"width": 3,
+			"file": "smashd.html",
+			"headerColor": "#9f9bbd"
+		},
+		{
+			"name": "caster",
+			"title": "Caster Overlay",
+			"width": 3,
+			"file": "casterd.html",
+			"headerColor": "#9f9bbd"
+		}
+	]
   }
 }
