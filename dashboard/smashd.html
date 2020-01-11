@@ -66,6 +66,7 @@
 	var rName = document.querySelector("#rName");
 	var pLL = document.querySelector("#fromLosersL");
 	var pRL = document.querySelector("#fromLosersR");
+	//var status = document.querySelector("#status"); not sure why this doesn't work
 	var url;
 	var tmp;
 	
@@ -73,6 +74,7 @@
 	pLSR.value = 0;
 	
 	btnApi.onclick = () => {
+		// A Replicant can be modified by modifying its `value`.
 		url = urlBase + cid.value + "/participants.json?api_key=" + capi.value;
 		document.querySelector("#status").innerHTML = "GET Request to " + url;
 		nodecg.sendMessage('capiGetInfo', url);
