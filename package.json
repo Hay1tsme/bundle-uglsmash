@@ -17,8 +17,13 @@
         "width": 1920,
         "height": 1080
       },
-	  {
+      {
         "file": "caster.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "brb.html",
         "width": 1920,
         "height": 1080
       }

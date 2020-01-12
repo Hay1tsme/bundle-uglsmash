@@ -1,166 +1,210 @@
 <!DOCTYPE html>
 <html>
-<!--TODO: Implement the 'from losers' tickboxes-->
+<head></head>
 <body>
-<label>Challonge API Key:</label>
-<input id="capi" type="password">
-<br>
-<label>URL Stub*:</label>
-<input id="cid" type="text">
-<br>
-<button id="btnApi">Get</button>
-<br>
-<br>
-<label>Tournament Title:</label>
-<input id="tName" type="text">
-<br>
-<label>Round Name:</label>
-<input id="rName" type="text">
-<br><br>
-<label>Left Player:</label>
-<br>
-<label>Name:</label>
-<div id="playerL"></div>
-<!--<input id="playerLS" type="text"></input>-->
-&nbsp;<label>Score:</label>
-<input id="playerLScore" type="number" value="0">
-<br>
-&nbsp;<label>Losers?</label>
-<input type="checkbox" id="fromLosersL">
-<br><br>
-<label>Right Player:</label>
-<br>
-<label>Name:</label>
-<div id="playerR"></div>
-<!--<input id="playerRS" type="text"></input>-->
-&nbsp;<label>Score:</label>
-<input id="playerRScore" type="number" value="0">
-<br>
-&nbsp;<label>Losers?</label>
-<input type="checkbox" id="fromLosersR">
-<br><br><input type="button" value="Update" id="btnUpdate">&nbsp;<input type="button" value="Switch" id="btnSw">
-<br><br>
-<div id="status"></div>
-<p id="footer">
-*Should be the tournament url, ex. mytourn. If a subdomain is used, must be in the form mysub-mytourn.
-</p>
-<style>
-	#playerLScore {
-		width: 3em;
-	}
-
-	#playerRScore {
-		width: 3em;
-	}
-
-	#footer {
-		font-size: 12px;
-	}
-</style>
-<script>
-	const capi = document.querySelector('#capi');
-	const cid = document.querySelector('#cid');
-	const urlBase = "https://api.challonge.com/v1/tournaments/";
-	const capiReplicant = nodecg.Replicant('capi-results');
-	const pLR = nodecg.Replicant('playerL');
-	const pRR = nodecg.Replicant('playerR');
-	const pLSR = nodecg.Replicant('playerLS');
-	const pRSR = nodecg.Replicant('playerRS');
-	const pLLR = nodecg.Replicant('playerLL');
-	const pRLR = nodecg.Replicant('playerRL');
-	const tNameR = nodecg.Replicant('tName');
-	const rNameR = nodecg.Replicant('rName');
-
-	var pLS;
-	var pRS;
-	var pL = document.querySelector("#playerL");
-	var pR = document.querySelector("#playerR");
-	var pLSc = document.querySelector("#playerLScore");
-	var pRSc = document.querySelector("#playerRScore");
-	var tName = document.querySelector("#tName");
-	var rName = document.querySelector("#rName");
-	var pLL = document.querySelector("#fromLosersL");
-	var pRL = document.querySelector("#fromLosersR");
-	var url;
-	var tmp;
-
-	pRSR.value = 0;
-	pLSR.value = 0;
-
-	btnApi.onclick = () => {
-		url = urlBase + cid.value + "/participants.json?api_key=" + capi.value;
-		document.querySelector("#status").innerHTML = "GET Request to " + url;
-		nodecg.sendMessage('capiGetInfo', url);
-	};
-
-	btnSw.onclick = () => {
-		document.querySelector("#status").innerHTML = "Swapping...";
-
-		tmp = pLS.selectedIndex;
-		pLS.selectedIndex = pRS.selectedIndex;
-		pRS.selectedIndex = tmp;
-
-		pLR.value = pLS.value;
-		pRR.value = pRS.value;
-
-		tmp = pLSc.value;
-		pLSc.value = pRSc.value;
-		pRSc.value = tmp;
-
-		pLSR.value = pLSc.value;
-		pRSR.value = pRSc.value;
-
-		tmp = pLL.checked;
-		pLL.checked = pRL.checked;
-		pRL.checked = tmp;
-
-		pLLR.value = pLL.checked;
-		pRLR.value = pRL.checked;
-
-		document.querySelector("#status").innerHTML = "Swapped " + pLR.value + " " + pRR.value;
-	};
-
-	btnUpdate.onclick = () => {
-		document.querySelector("#status").innerHTML = "Updating Names...";
-
-		pLS = document.querySelector("#playerLS");
-		pRS = document.querySelector("#playerRS");
-
-		pLR.value = pLS.value;
-		pRR.value = pRS.value;
-
-		pLSR.value = pLSc.value;
-		pRSR.value = pRSc.value;
-
-		pLLR.value = pLL.checked;
-		pRLR.value = pRL.checked;
-
-		tNameR.value = tName.value;
-		rNameR.value = rName.value;
-
-		document.querySelector("#status").innerHTML = "Updated Names: " + pLS.value + " " + pRS.value;
-	};
-
-	capiReplicant.on('change', (newValue, oldValue) => {
-		if (!newValue) {
-			return;
+	<label>Challonge API Key:</label>
+	<input id="capi" type="password">
+	<br>
+	<label>URL Stub*:</label>
+	<input id="cid" type="text">
+	<br>
+	<button id="btnApi">Get</button>
+	<br>
+	<br>
+	<label>Tournament Title:</label>
+	<input id="tName" type="text">
+	<br>
+	<label>Round Name:</label>
+	<input id="rName" type="text">
+	<br>
+	<label>Next Round:</label>
+	<input id="rNext" type="text">
+	<br><br>
+	<label>Left Player:</label>
+	<br>
+	<label>Name:</label>
+	<div id="playerL"></div>
+	<!--<input id="playerLS" type="text"></input>-->
+	&nbsp;<label>Score:</label>
+	<input id="playerLScore" type="number" value="0">&nbsp;<input type="button" id="playerLP" value="+"><input id="playerLM" value="-" type="button">
+	<br>
+	&nbsp;<label>Losers?</label>
+	<input type="checkbox" id="fromLosersL">
+	<br><br>
+	<label>Right Player:</label>
+	<br>
+	<label>Name:</label>
+	<div id="playerR"></div>
+	<!--<input id="playerRS" type="text"></input>-->
+	&nbsp;<label>Score:</label>
+	<input id="playerRScore" type="number" value="0">&nbsp;<input type="button" id="playerRP" value="+"><input id="playerRM" value="-" type="button">
+	<br>
+	&nbsp;<label>Losers?</label>
+	<input type="checkbox" id="fromLosersR">
+	<br><br><input type="button" value="Update" id="btnUpdate">&nbsp;<input type="button" value="Switch" id="btnSw">&nbsp;<input id="btnReset" type="button" value="Reset">
+	<br><br>
+	<div id="status"></div>
+	<p id="footer">
+		*Should be the tournament url, ex. mytourn. If a subdomain is used, must be in the form mysub-mytourn.
+	</p>
+	<style>
+		#playerLScore {
+			width: 3em;
 		}
 
-		document.querySelector("#status").innerHTML = "Got results!";
-		textR = "<select id='playerRS'><option value=''></option>";
-		textL = "<select id='playerLS'><option value=''></option>";
-		newValue.forEach(result => {
-			textL = textL + "<option value='" + result.participant.name + "'>" + result.participant.name + "</option>";
-			textR = textR + "<option value='" + result.participant.name + "'>" + result.participant.name + "</option>";
-		});
-		textR = textR + "</select>"
-		textL = textL + "</select>"
-		pR.innerHTML = textR;
-		pL.innerHTML = textL;
-		pLS = document.querySelector("#playerLS");
-		pRS = document.querySelector("#playerRS");
-		document.querySelector("#status").innerHTML = "First: " + newValue[0].participant.name;
-	});
-</script>
+		#playerRScore {
+			width: 3em;
+		}
+
+		#footer {
+			font-size: 12px;
+		}
+	</style>
+	<script>
+		const capi = document.querySelector('#capi');
+		const cid = document.querySelector('#cid');
+		const urlBase = "https://api.challonge.com/v1/tournaments/";
+		const capiReplicant = nodecg.Replicant('capi-results');
+		const pLR = nodecg.Replicant('playerL');
+		const pRR = nodecg.Replicant('playerR');
+		const pLSR = nodecg.Replicant('playerLS');
+		const pRSR = nodecg.Replicant('playerRS');
+		const pLLR = nodecg.Replicant('playerLL');
+		const pRLR = nodecg.Replicant('playerRL');
+		const tNameR = nodecg.Replicant('tName');
+		const rNameR = nodecg.Replicant('rName');
+		const rNextR = nodecg.Replicant('rNext');
+
+		var pLS;
+		var pRS;
+		var pL = document.querySelector("#playerL");
+		var pR = document.querySelector("#playerR");
+		var pLSc = document.querySelector("#playerLScore");
+		var pRSc = document.querySelector("#playerRScore");
+		var tName = document.querySelector("#tName");
+		var rName = document.querySelector("#rName");
+		var rNext = document.querySelector("#rNext");
+		var pLL = document.querySelector("#fromLosersL");
+		var pRL = document.querySelector("#fromLosersR");
+		var url;
+		var tmp;
+
+		pRSR.value = 0;
+		pLSR.value = 0;
+
+		btnApi.onclick = () => {
+			url = urlBase + cid.value + "/participants.json?api_key=" + capi.value;
+			document.querySelector("#status").innerHTML = "GET Request to " + url;
+			nodecg.sendMessage('capiGetInfo', url);
+		};
+
+		btnSw.onclick = () => {
+			document.querySelector("#status").innerHTML = "Swapping...";
+
+			tmp = pLS.selectedIndex;
+			pLS.selectedIndex = pRS.selectedIndex;
+			pRS.selectedIndex = tmp;
+
+			pLR.value = pLS.value;
+			pRR.value = pRS.value;
+
+			tmp = pLSc.value;
+			pLSc.value = pRSc.value;
+			pRSc.value = tmp;
+
+			pLSR.value = pLSc.value;
+			pRSR.value = pRSc.value;
+
+			tmp = pLL.checked;
+			pLL.checked = pRL.checked;
+			pRL.checked = tmp;
+
+			pLLR.value = pLL.checked;
+			pRLR.value = pRL.checked;
+
+			document.querySelector("#status").innerHTML = "Swapped " + pLR.value + " " + pRR.value;
+		};
+
+		btnUpdate.onclick = () => {
+			document.querySelector("#status").innerHTML = "Updating Names...";
+
+			pLS = document.querySelector("#playerLS");
+			pRS = document.querySelector("#playerRS");
+
+			pLR.value = pLS.value;
+			pRR.value = pRS.value;
+
+			pLSR.value = pLSc.value;
+			pRSR.value = pRSc.value;
+
+			pLLR.value = pLL.checked;
+			pRLR.value = pRL.checked;
+
+			tNameR.value = tName.value;
+			rNameR.value = rName.value;
+			rNextR.value = rNext.value;
+
+			document.querySelector("#status").innerHTML = "Updated Names: " + pLS.value + " " + pRS.value;
+		};
+
+		btnReset.onclick = () => {
+			pLSc.value = 0;
+			pRSc.value = 0;
+			pRSR.value = 0;
+			pLSR.value = 0;
+		};
+
+		playerLP.onclick = () => {
+			pLSc.value++;
+			pLSR.value++;
+		};
+
+		playerLM.onclick = () => {
+			pLSc.value--;
+			pLSR.value--;
+		};
+
+		playerRP.onclick = () => {
+			pRSc.value++;
+			pRSR.value++;
+		};
+
+		playerRM.onclick = () => {
+			pRSc.value--;
+			pRSR.value--;
+		};
+
+		capiReplicant.on('change',
+			(newValue, oldValue) => {
+				if (!newValue) {
+					return;
+				}
+
+				document.querySelector("#status").innerHTML = "Got results!";
+				textR = "<select id='playerRS'><option value=''></option>";
+				textL = "<select id='playerLS'><option value=''></option>";
+				newValue.forEach(result => {
+					textL = textL +
+						"<option value='" +
+						result.participant.name +
+						"'>" +
+						result.participant.name +
+						"</option>";
+					textR = textR +
+						"<option value='" +
+						result.participant.name +
+						"'>" +
+						result.participant.name +
+						"</option>";
+				});
+				textR = textR + "</select>"
+				textL = textL + "</select>"
+				pR.innerHTML = textR;
+				pL.innerHTML = textL;
+				pLS = document.querySelector("#playerLS");
+				pRS = document.querySelector("#playerRS");
+				document.querySelector("#status").innerHTML = "First: " + newValue[0].participant.name;
+			});
+	</script>
 </body>
 </html>

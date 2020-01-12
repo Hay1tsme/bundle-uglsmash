@@ -21,10 +21,10 @@
 			<circle r="50" cx="960" cy="1000" />
 		</g>
 		<g>
-			<polygon points="460,1035 715,1035 715,1000 520,1000" style="fill: red" />
-			<rect id="playerLLB" width="50" height="35" x="705" y="1000" style="fill: red; display: none" />
-			<polygon points="1200,1035 1455,1035 1455,1000 1260,1000" style="fill: blue" />
-			<rect id="playerRLB" width="50" height="35" x="1445" y="1000" style="fill: blue; display: none" />
+			<polygon points="460,1035 755,1035 755,1000 520,1000" style="fill: red" />
+			<rect id="playerLLB" width="50" height="35" x="705" y="1035" style="fill: red; display: none" />
+			<polygon points="1200,1035 1495,1035 1495,1000 1260,1000" style="fill: blue" />
+			<rect id="playerRLB" width="50" height="35" x="1445" y="1035" style="fill: blue; display: none" />
 		</g>
 	</svg>
 	<div style="position: absolute; top: 3px; left: 310px; color: white; font-size: 50px; height: 50px; width: 610px">
@@ -34,27 +34,32 @@
 		<div id="rName" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;"></div>
 	</div>
 
-	<div style="position: absolute; top: 1000px; left: 775px; color: white; font-size: 60px; height: 50px; width: 50px">
+	<div style="position: absolute; top: 994px; left: 775px; color: white; font-size: 60px; height: 50px; width: 50px">
 		<div id="playerLS" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;">0</div>
 	</div>
-	<div style="position: absolute; top: 1000px; left: 1095px; color: white; font-size: 60px; height: 50px; width: 50px">
+	<div style="position: absolute; top: 994px; left: 1095px; color: white; font-size: 60px; height: 50px; width: 50px">
 		<div id="playerRS" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;">0</div>
 	</div>
 
-	<div style="position: absolute; top: 1010px; left: 580px; color: white; font-size: 35px; height: 50px; width: 50px">
-		<div id="playerL" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;">0</div>
+	<div style="position: absolute; top: 1012px; left: 475px; color: white; font-size: 35px; height: 50px; width: 295px">
+		<div id="playerL" style="min-height: 75px; font-size: 25px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);  white-space: nowrap;">0</div>
 	</div>
-	<div style="position: absolute; top: 1010px; left: 1319px; color: white; font-size: 35px; height: 50px; width: 50px">
-		<div id="playerR" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap;">0</div>
+	<div style="position: absolute; top: 1012px; left: 1215px; color: white; font-size: 35px; height: 50px; width: 295px">
+		<div id="playerR" style="min-height: 75px; max-width: 280px; position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);  white-space: nowrap;">0</div>
 	</div>
 
-	<div style="position: absolute; top: 1007px; left: 700px; color: white; font-size: 35px; height: 50px; width: 50px">
-		<div id="playerLL" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap; display: none;">[L]</div>
-	</div>
-	<div style="position: absolute; top: 1007px; left: 1440px; color: white; font-size: 35px; height: 50px; width: 50px">
+<div style="position: absolute; top: 1038px; left: 705px; color: white; font-size: 35px; height: 50px; width: 50px">
+	<div id="playerLL" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap; display: none;">[L]</div>
+</div>
+	<div style="position: absolute; top: 1038px; left: 1445px; color: white; font-size: 35px; height: 50px; width: 50px">
 		<div id="playerRL" style="min-height: 75px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; white-space: nowrap; display: none;">[L]</div>
 	</div>
-
+<style type="text/css">
+	body {
+		font-family: verdana;
+		-webkit-text-stroke: 1px black;
+	}
+</style>
 	<script type="text/javascript">
 		const pLR = nodecg.Replicant('playerL');
 		const pRR = nodecg.Replicant('playerR');
@@ -68,10 +73,27 @@
 		pLR.on('change',
 			(newValue, oldValue) => {
 				playerL.innerText = newValue;
+				if (newValue.length > 11) {
+					playerL.style.fontSize = "25px";
+					playerL.style.top = "50%";
+				}
+				else {
+					playerL.style.fontSize = "";
+					playerL.style.top = "40%";
+				}
+
 			});
 		pRR.on('change',
 			(newValue, oldValue) => {
 				playerR.innerText = newValue;
+                if (newValue.length > 11) {
+	                playerR.style.fontSize = "25px";
+	                playerR.style.top = "50%";
+                }
+                else {
+	                playerR.style.fontSize = "";
+	                playerR.style.top = "40%";
+                }
 			});
 		pLLR.on('change',
 			(newValue, oldValue) => {
